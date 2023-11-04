@@ -1,7 +1,6 @@
 import torch
 from torch.utils.data import Dataset
 from scipy.io import loadmat
-from skimage import io
 import os
 from PIL import Image
 
@@ -31,7 +30,7 @@ class StanfordCars(Dataset):
     def __getitem__(self, index):
         img_path = os.path.join(self.root, self.subdir, self.annotation[index]["fname"])
         image = Image.open(img_path).convert("RGB")
-        label = torch.tensor(self.annotation[index]["class"])
+        label = torch.tensor(self.annotation[index]["class"] - 1)
 
         if self.transforms:
             image = self.transforms(image)
