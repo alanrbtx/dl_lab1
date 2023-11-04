@@ -37,3 +37,6 @@ os.listdir(dir) if os.path.isfile(os.path.join(dir, filename))]
             img = self.transform(img)
         
         return img, label
+
+def load_class_names(path):
+    return [str(arr[0]) for arr in loadmat(path)['class_names'][0]]
